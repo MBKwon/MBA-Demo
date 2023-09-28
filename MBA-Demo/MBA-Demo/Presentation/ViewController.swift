@@ -12,6 +12,7 @@ import UIKit
 class ViewController: UITableViewController {
     
     
+    private(set) var viewInteractor = ViewInteractor()
     private(set) var viewModel = ViewModel()
     private(set) var cancellables = Set<AnyCancellable>()
 
@@ -45,5 +46,31 @@ extension ViewController: ViewControllerConfigurable {
     }
     
     func handleResult(_ result: Result<ViewOutputMessage, Error>) {
+        let handleOutputMessage: (ViewOutputMessage) -> Void = {
+            self.viewInteractor.handleMessage(self.convertToInteraction(from: $0))
+        }
+        
+        result.fold(success: handleOutputMessage,
+                    failure: { (error) in
+            print(error.localizedDescription)
+        })
+    }
+}
+
+extension ViewController: ViewContollerInteractable {
+    
+    typealias VI = ViewInteractor
+    
+    typealias IM = ViewInteractionMessage
+    enum ViewInteractionMessage: InteractionMessage {
+        case reloadUserInfoView(tableView: UITableView, userInfoList: [UserInfo])
+    }
+    
+    
+    func convertToInteraction(from outputMessage: ViewOutputMessage) -> ViewInteractionMessage {
+        switch outputMessage {
+        case .respondToUserInfo(let userInfoList):
+            return .reloadUserInfoView(tableView: self.tableView, userInfoList: userInfoList)
+        }
     }
 }
