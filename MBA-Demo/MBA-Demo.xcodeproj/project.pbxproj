@@ -18,6 +18,7 @@
 		FEE5275C2AC5A7F900BC682F /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE5275B2AC5A7F900BC682F /* UserInfo.swift */; };
 		FEE5275E2AC5A98F00BC682F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE5275D2AC5A98F00BC682F /* ViewModel.swift */; };
 		FEE527602AC5A99B00BC682F /* ViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE5275F2AC5A99B00BC682F /* ViewInteractor.swift */; };
+		FEE527632AC5C5BC00BC682F /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE527622AC5C5BC00BC682F /* TableViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		FEE5275B2AC5A7F900BC682F /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		FEE5275D2AC5A98F00BC682F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		FEE5275F2AC5A99B00BC682F /* ViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInteractor.swift; sourceTree = "<group>"; };
+		FEE527622AC5C5BC00BC682F /* TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +100,20 @@
 		FEE527582AC5A78B00BC682F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FEE527612AC5C59800BC682F /* TableView */,
 				FEE527432AC5A6F300BC682F /* ViewController.swift */,
 				FEE5275F2AC5A99B00BC682F /* ViewInteractor.swift */,
 				FEE5275D2AC5A98F00BC682F /* ViewModel.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		FEE527612AC5C59800BC682F /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				FEE527622AC5C5BC00BC682F /* TableViewDelegate.swift */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE527632AC5C5BC00BC682F /* TableViewDelegate.swift in Sources */,
 				FEE5275C2AC5A7F900BC682F /* UserInfo.swift in Sources */,
 				FEE5275A2AC5A7D500BC682F /* APIController.swift in Sources */,
 				FEE527442AC5A6F300BC682F /* ViewController.swift in Sources */,

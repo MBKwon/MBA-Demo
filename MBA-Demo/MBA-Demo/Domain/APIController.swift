@@ -18,18 +18,18 @@ enum APIController {
 
 extension APIController {
     enum Path: APIPath {
-        case orderList
-        
+        case userInfoList
+
         var pathString: String {
             switch self {
-            case .orderList:
+            case .userInfoList:
                 return "/user_info"
             }
         }
         
         var parameters: [String: String]? {
             switch self {
-            case .orderList:
+            case .userInfoList:
                 return nil
             }
         }
