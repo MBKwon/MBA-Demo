@@ -11,16 +11,20 @@ import UIKit
 
 class ViewController: UITableViewController {
     
-    
-    private(set) var viewInteractor = ViewInteractor()
-    private(set) var viewModel = ViewModel()
-    private(set) var cancellables = Set<AnyCancellable>()
+    private(set) var microBean: MicroBean<ViewController, ViewModel, ViewInteractor>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.bindViewModel(self.viewModel)
-        self.viewModel.handleMessage(.requestUserInfo)
+
+        self.microBean = MicroBean(withVC: self,
+                                   viewModel: ViewModel(),
+                                   viewInteractor: ViewInteractor(),
+                                   observeMessage: { result in
+            print(result)
+        })
+        
+        self.microBean?.handleInputMessage(inputMessage: .requestUserInfo)
     }
 }
 
@@ -36,24 +40,6 @@ extension ViewController: ViewControllerConfigurable {
     typealias O = ViewOutputMessage
     enum ViewOutputMessage: OutputMessage {
         case respondToUserInfo(userInfoList: [UserInfo])
-    }
-    
-    func bindViewModel(_ viewModel: ViewModel) {
-        viewModel.outputSubject
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: self.handleResult(_:))
-            .store(in: &self.cancellables)
-    }
-    
-    func handleResult(_ result: Result<ViewOutputMessage, Error>) {
-        let handleOutputMessage: (ViewOutputMessage) -> Void = {
-            self.viewInteractor.handleMessage(self.convertToInteraction(from: $0))
-        }
-        
-        result.fold(success: handleOutputMessage,
-                    failure: { (error) in
-            print(error.localizedDescription)
-        })
     }
 }
 

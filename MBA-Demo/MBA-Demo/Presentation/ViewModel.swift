@@ -26,7 +26,7 @@ extension ViewModel {
     private func requestUserInfo() {
         Task {
             await APIController.shared
-                .request(path: APIController.Path.orderList, method:.get)
+                .request(path: APIController.Path.userInfoList, method: .get)
                 .decode(decoder: [UserInfo].self)
                 .map(VC.O.respondToUserInfo(userInfoList:))
                 .send(through: self.outputSubject)

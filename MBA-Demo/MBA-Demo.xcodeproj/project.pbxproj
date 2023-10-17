@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3B654F92ADE869C005FBFAB /* MBAkit in Frameworks */ = {isa = PBXBuildFile; productRef = C3B654F82ADE869C005FBFAB /* MBAkit */; };
 		FEE527402AC5A6F300BC682F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE5273F2AC5A6F300BC682F /* AppDelegate.swift */; };
 		FEE527422AC5A6F300BC682F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE527412AC5A6F300BC682F /* SceneDelegate.swift */; };
 		FEE527442AC5A6F300BC682F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE527432AC5A6F300BC682F /* ViewController.swift */; };
 		FEE527472AC5A6F300BC682F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE527452AC5A6F300BC682F /* Main.storyboard */; };
 		FEE527492AC5A6F400BC682F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE527482AC5A6F400BC682F /* Assets.xcassets */; };
 		FEE5274C2AC5A6F400BC682F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE5274A2AC5A6F400BC682F /* LaunchScreen.storyboard */; };
-		FEE527552AC5A73200BC682F /* MBAkit in Frameworks */ = {isa = PBXBuildFile; productRef = FEE527542AC5A73200BC682F /* MBAkit */; };
 		FEE5275A2AC5A7D500BC682F /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE527592AC5A7D500BC682F /* APIController.swift */; };
 		FEE5275C2AC5A7F900BC682F /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE5275B2AC5A7F900BC682F /* UserInfo.swift */; };
 		FEE5275E2AC5A98F00BC682F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE5275D2AC5A98F00BC682F /* ViewModel.swift */; };
@@ -42,18 +42,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEE527552AC5A73200BC682F /* MBAkit in Frameworks */,
+				C3B654F92ADE869C005FBFAB /* MBAkit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C3B654EE2ADE85B7005FBFAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FEE527332AC5A6F300BC682F = {
 			isa = PBXGroup;
 			children = (
 				FEE5273E2AC5A6F300BC682F /* MBA-Demo */,
 				FEE5273D2AC5A6F300BC682F /* Products */,
+				C3B654EE2ADE85B7005FBFAB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,7 +141,7 @@
 			);
 			name = "MBA-Demo";
 			packageProductDependencies = (
-				FEE527542AC5A73200BC682F /* MBAkit */,
+				C3B654F82ADE869C005FBFAB /* MBAkit */,
 			);
 			productName = "MBA-Demo";
 			productReference = FEE5273C2AC5A6F300BC682F /* MBA-Demo.app */;
@@ -164,7 +172,7 @@
 			);
 			mainGroup = FEE527332AC5A6F300BC682F;
 			packageReferences = (
-				FEE527532AC5A73200BC682F /* XCRemoteSwiftPackageReference "MBA-kit" */,
+				C3B654F72ADE869C005FBFAB /* XCRemoteSwiftPackageReference "MBA-kit" */,
 			);
 			productRefGroup = FEE5273D2AC5A6F300BC682F /* Products */;
 			projectDirPath = "";
@@ -418,20 +426,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FEE527532AC5A73200BC682F /* XCRemoteSwiftPackageReference "MBA-kit" */ = {
+		C3B654F72ADE869C005FBFAB /* XCRemoteSwiftPackageReference "MBA-kit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MBKwon/MBA-kit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.8.0;
+				minimumVersion = 0.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FEE527542AC5A73200BC682F /* MBAkit */ = {
+		C3B654F82ADE869C005FBFAB /* MBAkit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FEE527532AC5A73200BC682F /* XCRemoteSwiftPackageReference "MBA-kit" */;
+			package = C3B654F72ADE869C005FBFAB /* XCRemoteSwiftPackageReference "MBA-kit" */;
 			productName = MBAkit;
 		};
 /* End XCSwiftPackageProductDependency section */
