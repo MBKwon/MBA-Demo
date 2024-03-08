@@ -24,10 +24,11 @@ class ViewController: UITableViewController {
             print(result)
         })
         
-        self.microBean?.handleInputMessage(inputMessage: .requestUserInfo)
+        self.microBean?.handle(inputMessage: .requestUserInfo)
     }
 }
 
+// MARK: - VC-VM : input message -> output messaage
 extension ViewController: ViewControllerConfigurable {
     
     typealias VM = ViewModel
@@ -43,6 +44,7 @@ extension ViewController: ViewControllerConfigurable {
     }
 }
 
+// MARK: - VM-VI : output messaage -> interaction message
 extension ViewController: ViewContollerInteractable {
     
     typealias VI = ViewInteractor
