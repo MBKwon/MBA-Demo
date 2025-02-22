@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C3B654F92ADE869C005FBFAB /* MBAkit in Frameworks */ = {isa = PBXBuildFile; productRef = C3B654F82ADE869C005FBFAB /* MBAkit */; };
+		018B6B962D65DF4700ECB5EE /* MBAkit in Frameworks */ = {isa = PBXBuildFile; productRef = 018B6B952D65DF4700ECB5EE /* MBAkit */; };
 		FEE527402AC5A6F300BC682F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE5273F2AC5A6F300BC682F /* AppDelegate.swift */; };
 		FEE527422AC5A6F300BC682F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE527412AC5A6F300BC682F /* SceneDelegate.swift */; };
 		FEE527442AC5A6F300BC682F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE527432AC5A6F300BC682F /* ViewController.swift */; };
@@ -42,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3B654F92ADE869C005FBFAB /* MBAkit in Frameworks */,
+				018B6B962D65DF4700ECB5EE /* MBAkit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +141,7 @@
 			);
 			name = "MBA-Demo";
 			packageProductDependencies = (
-				C3B654F82ADE869C005FBFAB /* MBAkit */,
+				018B6B952D65DF4700ECB5EE /* MBAkit */,
 			);
 			productName = "MBA-Demo";
 			productReference = FEE5273C2AC5A6F300BC682F /* MBA-Demo.app */;
@@ -172,7 +172,7 @@
 			);
 			mainGroup = FEE527332AC5A6F300BC682F;
 			packageReferences = (
-				C3B654F72ADE869C005FBFAB /* XCRemoteSwiftPackageReference "MBA-kit" */,
+				018B6B942D65DF4700ECB5EE /* XCRemoteSwiftPackageReference "MBA-kit" */,
 			);
 			productRefGroup = FEE5273D2AC5A6F300BC682F /* Products */;
 			projectDirPath = "";
@@ -426,20 +426,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C3B654F72ADE869C005FBFAB /* XCRemoteSwiftPackageReference "MBA-kit" */ = {
+		018B6B942D65DF4700ECB5EE /* XCRemoteSwiftPackageReference "MBA-kit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MBKwon/MBA-kit.git";
+			repositoryURL = "https://github.com/MBKwon/MBA-kit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.0;
+				minimumVersion = 0.9.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C3B654F82ADE869C005FBFAB /* MBAkit */ = {
+		018B6B952D65DF4700ECB5EE /* MBAkit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C3B654F72ADE869C005FBFAB /* XCRemoteSwiftPackageReference "MBA-kit" */;
+			package = 018B6B942D65DF4700ECB5EE /* XCRemoteSwiftPackageReference "MBA-kit" */;
 			productName = MBAkit;
 		};
 /* End XCSwiftPackageProductDependency section */

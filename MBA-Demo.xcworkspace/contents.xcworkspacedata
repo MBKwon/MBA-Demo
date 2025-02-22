@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:MBA-Demo"
+      name = "MBA-Demo">
+      <FileRef
+         location = "group:MBA-Demo.xcodeproj">
+      </FileRef>
+      <Group
+         location = "group:MBA-Demo"
+         name = "MBA-Demo">
+         <Group
+            location = "group:Entity"
+            name = "Entity">
+            <FileRef
+               location = "group:UserInfo.swift">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Assets.xcassets">
+         </FileRef>
+         <Group
+            location = "group:Base.lproj"
+            name = "Base.lproj">
+            <FileRef
+               location = "group:LaunchScreen.storyboard">
+            </FileRef>
+            <FileRef
+               location = "group:Main.storyboard">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:AppDelegate.swift">
+         </FileRef>
+         <Group
+            location = "group:Domain"
+            name = "Domain">
+            <FileRef
+               location = "group:APIController.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Presentation"
+            name = "Presentation">
+            <FileRef
+               location = "group:ViewController.swift">
+            </FileRef>
+            <Group
+               location = "group:TableView"
+               name = "TableView">
+               <FileRef
+                  location = "group:TableViewDelegate.swift">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:ViewInteractor.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ViewModel.swift">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Info.plist">
+         </FileRef>
+         <FileRef
+            location = "group:SceneDelegate.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:DB"
+         name = "DB">
+         <FileRef
+            location = "group:db.json">
+         </FileRef>
+      </Group>
+   </Group>
+</Workspace>
