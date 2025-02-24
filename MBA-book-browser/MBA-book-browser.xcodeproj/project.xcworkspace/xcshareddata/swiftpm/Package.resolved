@@ -1,0 +1,24 @@
+{
+  "originHash" : "cd9f379f6c98550e9fb9d601c21d2878bff84ee876003fb089e2baa6f6cfee04",
+  "pins" : [
+    {
+      "identity" : "mba-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MBKwon/MBA-kit",
+      "state" : {
+        "revision" : "05d8057ec3a1bc30c2a2e115e0fbb0166028c840",
+        "version" : "0.9.8"
+      }
+    },
+    {
+      "identity" : "resultextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MBKwon/ResultExtensions",
+      "state" : {
+        "revision" : "60c252f7a57c8b64f51bb566722e5654756901db",
+        "version" : "0.9.5"
+      }
+    }
+  ],
+  "version" : 3
+}
