@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		018B6BBA2D699E0700ECB5EE /* MBAkit in Frameworks */ = {isa = PBXBuildFile; productRef = 018B6BB92D699E0700ECB5EE /* MBAkit */; };
+		0172633B2D6C500A000D577A /* MBAkit-core in Frameworks */ = {isa = PBXBuildFile; productRef = 0172633A2D6C500A000D577A /* MBAkit-core */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				018B6BBA2D699E0700ECB5EE /* MBAkit in Frameworks */,
+				0172633B2D6C500A000D577A /* MBAkit-core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 			);
 			name = "MBA-calculator";
 			packageProductDependencies = (
-				018B6BB92D699E0700ECB5EE /* MBAkit */,
+				0172633A2D6C500A000D577A /* MBAkit-core */,
 			);
 			productName = "MBA-calculator";
 			productReference = 018B6BA02D699DE600ECB5EE /* MBA-calculator.app */;
@@ -114,7 +114,7 @@
 			mainGroup = 018B6B972D699DE600ECB5EE;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				018B6BB82D699E0700ECB5EE /* XCRemoteSwiftPackageReference "MBA-kit" */,
+				017263392D6C500A000D577A /* XCRemoteSwiftPackageReference "MBA-kit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 018B6BA12D699DE600ECB5EE /* Products */;
@@ -348,21 +348,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		018B6BB82D699E0700ECB5EE /* XCRemoteSwiftPackageReference "MBA-kit" */ = {
+		017263392D6C500A000D577A /* XCRemoteSwiftPackageReference "MBA-kit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MBKwon/MBA-kit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.5;
+				minimumVersion = 0.9.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		018B6BB92D699E0700ECB5EE /* MBAkit */ = {
+		0172633A2D6C500A000D577A /* MBAkit-core */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 018B6BB82D699E0700ECB5EE /* XCRemoteSwiftPackageReference "MBA-kit" */;
-			productName = MBAkit;
+			package = 017263392D6C500A000D577A /* XCRemoteSwiftPackageReference "MBA-kit" */;
+			productName = "MBAkit-core";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

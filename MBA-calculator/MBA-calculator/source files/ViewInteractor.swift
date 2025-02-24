@@ -5,7 +5,7 @@
 //  Created by Moonbeom KWON on 2/24/25.
 //
 
-import MBAkit
+import MBAkit_core
 import UIKit
 
 class ViewInteractor: ViewInteractorConfigurable {

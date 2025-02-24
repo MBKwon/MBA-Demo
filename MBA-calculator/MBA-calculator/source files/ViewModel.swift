@@ -7,7 +7,7 @@
 
 import Combine
 import Foundation
-import MBAkit
+import MBAkit_core
 
 class ViewModel: ViewModelConfigurable {
     
