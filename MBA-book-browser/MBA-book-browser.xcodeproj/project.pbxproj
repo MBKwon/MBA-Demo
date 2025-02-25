@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0125E27F2D6C5930003FC1E0 /* MBAkit in Frameworks */ = {isa = PBXBuildFile; productRef = 0125E27E2D6C5930003FC1E0 /* MBAkit */; };
+		0150A35A2D6C60840041C8F2 /* MBAkit in Frameworks */ = {isa = PBXBuildFile; productRef = 0150A3592D6C60840041C8F2 /* MBAkit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0125E27F2D6C5930003FC1E0 /* MBAkit in Frameworks */,
+				0150A35A2D6C60840041C8F2 /* MBAkit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 			);
 			name = "MBA-book-browser";
 			packageProductDependencies = (
-				0125E27E2D6C5930003FC1E0 /* MBAkit */,
+				0150A3592D6C60840041C8F2 /* MBAkit */,
 			);
 			productName = "MBA-book-browser";
 			productReference = 01AEF5382D6C46FC00962B6E /* MBA-book-browser.app */;
@@ -114,7 +114,7 @@
 			mainGroup = 01AEF52F2D6C46FC00962B6E;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				0125E27D2D6C5930003FC1E0 /* XCRemoteSwiftPackageReference "MBA-kit" */,
+				0150A3582D6C60840041C8F2 /* XCRemoteSwiftPackageReference "MBA-kit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 01AEF5392D6C46FC00962B6E /* Products */;
@@ -346,20 +346,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0125E27D2D6C5930003FC1E0 /* XCRemoteSwiftPackageReference "MBA-kit" */ = {
+		0150A3582D6C60840041C8F2 /* XCRemoteSwiftPackageReference "MBA-kit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MBKwon/MBA-kit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.8;
+				minimumVersion = 0.9.9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0125E27E2D6C5930003FC1E0 /* MBAkit */ = {
+		0150A3592D6C60840041C8F2 /* MBAkit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0125E27D2D6C5930003FC1E0 /* XCRemoteSwiftPackageReference "MBA-kit" */;
+			package = 0150A3582D6C60840041C8F2 /* XCRemoteSwiftPackageReference "MBA-kit" */;
 			productName = MBAkit;
 		};
 /* End XCSwiftPackageProductDependency section */

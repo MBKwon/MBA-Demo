@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MBA-book-browser/MBA-book-browser.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:MBA-calculator/MBA-calculator.xcodeproj">
    </FileRef>
    <FileRef

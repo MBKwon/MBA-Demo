@@ -1,13 +1,13 @@
 {
-  "originHash" : "cd9f379f6c98550e9fb9d601c21d2878bff84ee876003fb089e2baa6f6cfee04",
+  "originHash" : "cbb569fc3b1db94f0e278b59d5ae70351c0411dcddd7ef135555e39ae9a49b66",
   "pins" : [
     {
       "identity" : "mba-kit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MBKwon/MBA-kit",
       "state" : {
-        "revision" : "f773887698fcf0a17d2828c89be320df348f9ecd",
-        "version" : "0.9.5"
+        "revision" : "5905bd6d0adf9fe21bc318010a2710eb6ef801ea",
+        "version" : "0.9.9"
       }
     },
     {

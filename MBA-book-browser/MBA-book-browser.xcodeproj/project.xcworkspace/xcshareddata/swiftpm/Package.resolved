@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MBKwon/MBA-kit",
       "state" : {
-        "revision" : "05d8057ec3a1bc30c2a2e115e0fbb0166028c840",
-        "version" : "0.9.8"
+        "revision" : "5905bd6d0adf9fe21bc318010a2710eb6ef801ea",
+        "version" : "0.9.9"
       }
     },
     {
