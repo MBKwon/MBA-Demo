@@ -22,5 +22,6 @@ class BookImageCell: UITableViewCell {
         bookTitleLabel.text = nil
         bookSubtitleLabel.text = nil
         saleStatusLabel.text = nil
+        photoImageURL = nil
     }
 }

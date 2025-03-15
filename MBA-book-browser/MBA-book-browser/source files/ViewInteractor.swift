@@ -1,12 +1,11 @@
 //
 //  ViewInteractor.swift
-//  MBA-Demo
+//  MBA-book-browser
 //
-//  Created by Moonbeom KWON on 2023/09/28.
+//  Created by Moonbeom KWON on 2/26/25.
 //
 
-import Foundation
-import MBAkit
+import MBAkit_core
 
 class ViewInteractor: ViewInteractorConfigurable {
     
@@ -15,8 +14,8 @@ class ViewInteractor: ViewInteractorConfigurable {
     
     func handleMessage(_ interactionMessage: ViewController.ViewInteractionMessage) {
         switch interactionMessage {
-        case .reloadUserInfoView(let tableView, let userInfoList):
-            let tableViewDelegate = TableViewDelegate(with: userInfoList)
+        case .reloadBookList(let tableView, let datasource, let vc):
+            let tableViewDelegate = TableViewDelegate(with: datasource, vc: vc)
             tableView.dataSource = tableViewDelegate
             tableView.delegate = tableViewDelegate
             tableView.reloadData()

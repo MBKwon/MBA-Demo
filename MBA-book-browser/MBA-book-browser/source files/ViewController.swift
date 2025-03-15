@@ -5,7 +5,7 @@
 //  Created by Moonbeom KWON on 2/24/25.
 //
 
-import MBAkit_image_loader
+import MBAkit_core
 import UIKit
 
 class ViewController: UIViewController {
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     private lazy var apiLibrary: APIOpenLibrary = .init()
     private var selectedBook: APIBookDataModel?
-    private var datasource: BookListData?
+    private var datasource: TableViewDelegate.BookListData?
     private var isPrefetching: Bool = false {
         didSet {
             loadingBackgroundView.isHidden = !isPrefetching
@@ -32,16 +32,17 @@ class ViewController: UIViewController {
         }
     }
     
-    struct BookListData {
-        let keyword: String
-        let latestResponse: APISearchDataModel
-        let itemList: [APIBookDataModel]
-    }
+    private(set) var microBean: MicroBean<ViewController, ViewModel, ViewInteractor>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.isPrefetchingEnabled = true
+        tableView.prefetchDataSource = self
+        
+        microBean = MicroBean(withVC: self,
+                              viewModel: ViewModel(),
+                              viewInteractor: ViewInteractor())
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,55 +54,71 @@ class ViewController: UIViewController {
         }
     }
     
-    private func loadBookList(with keyword: String) async -> Result<APISearchDataModel, Error> {
-        let searchIndex = datasource?.itemList.count
-        let result = await apiLibrary.request(with: .search(text: keyword, startIndex: searchIndex),
-                                              decoder: APISearchDataModel.self)
-        
-        switch result {
-        case .success(let searchDataModel):
-            if let originDatasource = datasource {
-                if originDatasource.keyword == keyword {
-                    let newItemList = originDatasource.itemList + searchDataModel.items
-                    datasource = BookListData(keyword: keyword,
-                                              latestResponse: searchDataModel,
-                                              itemList: newItemList)
-                } else {
-                    datasource = BookListData(keyword: keyword,
-                                              latestResponse: searchDataModel,
-                                              itemList: searchDataModel.items)
-                }
-            } else {
-                datasource = BookListData(keyword: keyword,
-                                          latestResponse: searchDataModel,
-                                          itemList: searchDataModel.items)
-            }
-        case .failure(let error):
-            print(error)
-        }
-        
-        return result
+    private func loadBookList(with keyword: String) {
+        datasource?.keyword != keyword ? (datasource = nil) : ()
+        let message = I.loadBookListData(keyword: keyword, startIndex: datasource?.itemList.count)
+        microBean?.handle(inputMessage: message)
     }
     
     private func reloadTableView(with result: Result<APISearchDataModel, Error>) {
-        switch result {
-        case .success:
-            tableView.reloadData()
-        case.failure(let error):
-            print(error.localizedDescription)
-        }
+        result.fold(success: { _ in tableView.reloadData() },
+                    failure: { print($0.localizedDescription) })
         
         isPrefetching = false
+    }
+}
+
+extension ViewController: ViewControllerConfigurable {
+    
+    typealias VM = ViewModel
+    
+    typealias I = ViewInputMessage
+    enum ViewInputMessage: InputMessage {
+        case loadBookListData(keyword: String, startIndex: Int?)
+    }
+    
+    typealias O = ViewOutputMessage
+    enum ViewOutputMessage: OutputMessage {
+        case updateBookList(keyword:String, result: APISearchDataModel, paging: Bool)
+    }
+}
+
+extension ViewController: ViewContollerInteractable {
+    
+    typealias VI = ViewInteractor
+    
+    typealias IM = ViewInteractionMessage
+    enum ViewInteractionMessage: InteractionMessage {
+        case reloadBookList(tableView: UITableView,
+                            datasource: TableViewDelegate.BookListData,
+                            vc: ViewController)
+    }
+    
+    func convertToInteraction(from outputMessage: ViewOutputMessage) -> ViewInteractionMessage {
+        switch outputMessage {
+        case .updateBookList(let keyword, let result, let paging):
+            isPrefetching = false
+            let datasource: TableViewDelegate.BookListData
+            if paging {
+                let exList = self.datasource?.itemList ?? []
+                datasource = TableViewDelegate.BookListData(keyword: keyword,
+                                                            latestResponse: result,
+                                                            itemList: exList + result.items)
+            } else {
+                datasource = TableViewDelegate.BookListData(keyword: keyword,
+                                                            latestResponse: result,
+                                                            itemList: result.items)
+            }
+            self.datasource = datasource
+            return .reloadBookList(tableView: tableView, datasource: datasource, vc: self)
+        }
     }
 }
 
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let text = textField.text, text.isEmpty == false {
-            Task {
-                let result = await loadBookList(with: text)
-                reloadTableView(with: result)
-            }
+            loadBookList(with: text)
         } else {
             print("Empty text")
         }
@@ -119,70 +136,12 @@ extension ViewController: UITableViewDataSourcePrefetching {
               datasource.itemList.count < indexForPrefetching else { return }
         
         isPrefetching = true
-        Task {
-            let result = await loadBookList(with: datasource.keyword)
-            reloadTableView(with: result)
-        }
+        loadBookList(with: datasource.keyword)
     }
 }
 
-extension ViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let datasource = datasource {
-            return datasource.latestResponse.totalItems
-        } else {
-            return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookImageCell") as? BookImageCell else {
-            return UITableViewCell()
-        }
-        
-        cell.selectionStyle = .none
-        
-        if let datasource = datasource, datasource.itemList.count > indexPath.row {
-            let bookDataModel = datasource.itemList[indexPath.row]
-            cell.bookTitleLabel.text = bookDataModel.volumeInfo.title
-            cell.bookSubtitleLabel.text = bookDataModel.volumeInfo.subtitle
-            cell.saleStatusLabel.text = bookDataModel.saleInfo.saleability
-            
-            
-            if let thumbnailURL = bookDataModel.volumeInfo.imageLinks?.smallThumbnail,
-               let imageURL = URL(string: thumbnailURL) {
-                
-                cell.photoImageURL = thumbnailURL
-                Task {
-                    switch await ImageLoader.loadImage(with: imageURL) {
-                    case .success(let imageData):
-                        guard imageData.url == cell.photoImageURL else { return }
-                        DispatchQueue.main.async {
-                            cell.photoImageView.image = UIImage(data: imageData.data)
-                        }
-                        
-                    case .failure(let error):
-                        print("ImageLoad Error: \(error)")
-                    }
-                }
-            } else {
-                cell.photoImageView.image = nil
-            }
-        } else {
-            cell.photoImageView.image = nil
-        }
-        return cell
-    }
-}
-
-extension ViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension ViewController {
+    func selectBookCell(at indexPath: IndexPath) {
         if let datasource = datasource, datasource.itemList.count > indexPath.row {
             selectedBook = datasource.itemList[indexPath.row]
             performSegue(withIdentifier: SegueIdentifier.showBookDetail.rawValue,

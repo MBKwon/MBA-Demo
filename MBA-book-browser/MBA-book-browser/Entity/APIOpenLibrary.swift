@@ -40,7 +40,7 @@ class APIOpenLibrary {
                 var paramDic = [
                     "q": text,
                     "maxResults": "40"
-                    ]
+                ]
                 if let startIndex = startIndex {
                     paramDic["startIndex"] = "\(startIndex)"
                 }
@@ -48,10 +48,11 @@ class APIOpenLibrary {
             }
         }
     }
-    
-    func request<T: Decodable>(with type: APIType, decoder: T.Type) async -> Result<T, Error> {
+}
+ 
+extension APIOpenLibrary {
+    func request(with type: APIType) async -> Result<ResponseType, Error> {
         return await session.request(path: type, method: type.method)
-            .decode(decoder: decoder)
     }
 }
 
