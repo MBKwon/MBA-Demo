@@ -19,8 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet private weak var loadingIndicatorView: UIActivityIndicatorView!
     
     private lazy var apiLibrary: APIOpenLibrary = .init()
-    private var selectedBook: APIBookDataModel?
     private var datasource: TableViewDelegate.BookListData?
+    
     private var isPrefetching: Bool = false {
         didSet {
             loadingBackgroundView.isHidden = !isPrefetching
@@ -48,15 +48,16 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.showBookDetail.rawValue,
            let detailVC = segue.destination as? BookDetailViewController,
-           let targetBook = selectedBook {
-            detailVC.selectedBook = targetBook
-            selectedBook = nil
+           let selectedBook = sender as? APIBookDataModel {
+            detailVC.selectedBook = selectedBook
         }
     }
     
     private func loadBookList(with keyword: String) {
         datasource?.keyword != keyword ? (datasource = nil) : ()
-        let message = I.loadBookListData(keyword: keyword, startIndex: datasource?.itemList.count)
+        let message = I.loadBookListData(keyword: keyword,
+                                         startIndex: datasource?.itemList.count,
+                                         library: apiLibrary)
         microBean?.handle(inputMessage: message)
     }
     
@@ -74,7 +75,7 @@ extension ViewController: ViewControllerConfigurable {
     
     typealias I = ViewInputMessage
     enum ViewInputMessage: InputMessage {
-        case loadBookListData(keyword: String, startIndex: Int?)
+        case loadBookListData(keyword: String, startIndex: Int?, library: APIOpenLibrary)
     }
     
     typealias O = ViewOutputMessage
@@ -142,12 +143,8 @@ extension ViewController: UITableViewDataSourcePrefetching {
 
 extension ViewController {
     func selectBookCell(at indexPath: IndexPath) {
-        if let datasource = datasource, datasource.itemList.count > indexPath.row {
-            selectedBook = datasource.itemList[indexPath.row]
-            performSegue(withIdentifier: SegueIdentifier.showBookDetail.rawValue,
-                         sender: nil)
-        } else {
-            selectedBook = nil
-        }
+        guard let datasource = datasource, datasource.itemList.count > indexPath.row else { return }
+        performSegue(withIdentifier: SegueIdentifier.showBookDetail.rawValue,
+                     sender: datasource.itemList[indexPath.row])
     }
 }
