@@ -18,7 +18,6 @@ class ViewController: UIViewController {
     @IBOutlet private weak var loadingBackgroundView: UIView!
     @IBOutlet private weak var loadingIndicatorView: UIActivityIndicatorView!
     
-    private lazy var apiLibrary: APIOpenLibrary = .init()
     private var datasource: TableViewDelegate.BookListData?
     
     private var isPrefetching: Bool = false {
@@ -54,10 +53,14 @@ class ViewController: UIViewController {
     }
     
     private func loadBookList(with keyword: String) {
-        datasource?.keyword != keyword ? (datasource = nil) : ()
-        let message = I.loadBookListData(keyword: keyword,
-                                         startIndex: datasource?.itemList.count,
-                                         library: apiLibrary)
+        let message = {
+            if let datasource = self.datasource, datasource.keyword == keyword {
+                return I.pageBookListData(keyword: keyword,
+                                          startIndex: datasource.itemList.count)
+            } else {
+                return I.searchBookListData(keyword: keyword)
+            }
+        }()
         microBean?.handle(inputMessage: message)
     }
     
@@ -75,12 +78,14 @@ extension ViewController: ViewControllerConfigurable {
     
     typealias I = ViewInputMessage
     enum ViewInputMessage: InputMessage {
-        case loadBookListData(keyword: String, startIndex: Int?, library: APIOpenLibrary)
+        case searchBookListData(keyword: String)
+        case pageBookListData(keyword: String, startIndex: Int)
     }
     
     typealias O = ViewOutputMessage
     enum ViewOutputMessage: OutputMessage {
-        case updateBookList(keyword:String, result: APISearchDataModel, paging: Bool)
+        case searchBookList(keyword:String, result: APISearchDataModel)
+        case pageBookList(result: APISearchDataModel)
     }
 }
 
@@ -96,23 +101,22 @@ extension ViewController: ViewContollerInteractable {
     }
     
     func convertToInteraction(from outputMessage: ViewOutputMessage) -> ViewInteractionMessage {
+        let datasource: TableViewDelegate.BookListData
         switch outputMessage {
-        case .updateBookList(let keyword, let result, let paging):
-            isPrefetching = false
-            let datasource: TableViewDelegate.BookListData
-            if paging {
-                let exList = self.datasource?.itemList ?? []
-                datasource = TableViewDelegate.BookListData(keyword: keyword,
-                                                            latestResponse: result,
-                                                            itemList: exList + result.items)
-            } else {
-                datasource = TableViewDelegate.BookListData(keyword: keyword,
-                                                            latestResponse: result,
-                                                            itemList: result.items)
-            }
-            self.datasource = datasource
-            return .reloadBookList(tableView: tableView, datasource: datasource, vc: self)
+        case .searchBookList(let keyword, let result):
+            datasource = TableViewDelegate.BookListData(keyword: keyword,
+                                                        latestResponse: result,
+                                                        itemList: result.items)
+        case .pageBookList(let result):
+            let keyword = self.datasource?.keyword ?? ""
+            let exList = self.datasource?.itemList ?? []
+            datasource = TableViewDelegate.BookListData(keyword: keyword,
+                                                        latestResponse: result,
+                                                        itemList: exList + result.items)
         }
+        isPrefetching = false
+        self.datasource = datasource
+        return .reloadBookList(tableView: tableView, datasource: datasource, vc: self)
     }
 }
 
